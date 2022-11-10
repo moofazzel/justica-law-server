@@ -37,6 +37,10 @@ const justicaDataCollections = client
   .db("jastica-db")
   .collection("justica-data");
 
+const justicaReviewCollections = client
+  .db("jastica-db")
+  .collection("justica-review");
+
 // find all data
 try {
   app.get("/data", async (req, res) => {
@@ -82,6 +86,19 @@ try {
 } catch (error) {
   console.log(error.name, error.massage, error.stack);
 }
+
+// insert review
+try {
+  app.post("/review", async (req, res) => {
+    const result = await justicaReviewCollections.insertOne(req.body);
+    res.send(result);
+  });
+} catch (error) {
+  console.log(error.name, error.massage, error.stack);
+}
+
+
+
 
 app.listen(port, () =>
   console.log("Justica Server up and Running on port", port)
