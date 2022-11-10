@@ -97,8 +97,18 @@ try {
   console.log(error.name, error.massage, error.stack);
 }
 
-
-
+// // find review with ID
+try {
+  app.get("/service/:id", async (req, res) => {
+    const { id } = req.params;
+    const query = { service_id: id };
+    const cursor = justicaReviewCollections.find(query);
+    const reviews = await cursor.toArray();
+    res.send(reviews);
+  });
+} catch (error) {
+  console.log(error.name, error.massage, error.stack);
+}
 
 app.listen(port, () =>
   console.log("Justica Server up and Running on port", port)
