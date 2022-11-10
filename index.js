@@ -53,6 +53,7 @@ try {
 } catch (error) {
   console.log(error.name, error.massage, error.stack);
 }
+
 // find 3 data
 try {
   app.get("/dataLimit", async (req, res) => {
@@ -109,6 +110,31 @@ try {
 } catch (error) {
   console.log(error.name, error.massage, error.stack);
 }
+
+// // find review with uid
+try {
+  app.get("/my_review", async (req, res) => {
+    const uid = req.query.uid;
+
+    const query = { uid: uid };
+    const cursor = justicaReviewCollections.find(query);
+    const reviews = await cursor.toArray();
+    res.send(reviews);
+    console.log(reviews);
+  });
+} catch (error) {
+  console.log(error.name, error.massage, error.stack);
+}
+
+// try {
+//   app.get("/my_review", async (req, res) => {
+//     const uid = req.query.uid;
+//     const result = await justicaReviewCollections.insertOne(uid);
+//     res.send(result);
+//   });
+// } catch (error) {
+//   console.log(error.name, error.massage, error.stack);
+// }
 
 app.listen(port, () =>
   console.log("Justica Server up and Running on port", port)
