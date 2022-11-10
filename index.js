@@ -88,15 +88,6 @@ try {
   console.log(error.name, error.massage, error.stack);
 }
 
-// insert review
-try {
-  app.post("/review", async (req, res) => {
-    const result = await justicaReviewCollections.insertOne(req.body);
-    res.send(result);
-  });
-} catch (error) {
-  console.log(error.name, error.massage, error.stack);
-}
 
 // // find review with ID
 try {
@@ -110,6 +101,18 @@ try {
 } catch (error) {
   console.log(error.name, error.massage, error.stack);
 }
+
+// insert review
+try {
+  app.post("/review", async (req, res) => {
+    const result = await justicaReviewCollections.insertOne(req.body);
+    res.send(result);
+  });
+} catch (error) {
+  console.log(error.name, error.massage, error.stack);
+}
+
+
 
 // // find review with uid
 try {
@@ -126,15 +129,6 @@ try {
   console.log(error.name, error.massage, error.stack);
 }
 
-// try {
-//   app.get("/my_review", async (req, res) => {
-//     const uid = req.query.uid;
-//     const result = await justicaReviewCollections.insertOne(uid);
-//     res.send(result);
-//   });
-// } catch (error) {
-//   console.log(error.name, error.massage, error.stack);
-// }
 
 app.listen(port, () =>
   console.log("Justica Server up and Running on port", port)
