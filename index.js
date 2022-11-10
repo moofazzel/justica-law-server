@@ -49,6 +49,18 @@ try {
 } catch (error) {
   console.log(error.name, error.massage, error.stack);
 }
+// find 3 data
+try {
+  app.get("/dataLimit", async (req, res) => {
+    const query = {};
+    const cursor = justicaDataCollections.find(query);
+    const data = await cursor.limit(3).toArray();
+    res.send(data);
+    console.log(data);
+  });
+} catch (error) {
+  console.log(error.name, error.massage, error.stack);
+}
 // find data with ID
 try {
   app.get("/data/:id", async (req, res) => {
@@ -56,6 +68,16 @@ try {
     const query = { _id: ObjectId(id) };
     const data = await justicaDataCollections.findOne(query);
     res.send(data);
+  });
+} catch (error) {
+  console.log(error.name, error.massage, error.stack);
+}
+
+// insert document
+try {
+  app.post("/service", async (req, res) => {
+    const result = await justicaDataCollections.insertOne(req.body);
+    res.send(result);
   });
 } catch (error) {
   console.log(error.name, error.massage, error.stack);
